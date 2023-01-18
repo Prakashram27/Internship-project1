@@ -1,0 +1,9 @@
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+.parent{
+    margin-left: 300px;
+    margin-top: 30px;
+   
+}
+

@@ -1,0 +1,48 @@
+<div class="parent">
+
+<form (ngSubmit)=onAddItem(add) #add="ngForm" > 
+        <div class="formGroup" class="col-sm-8">
+        <label>Enter your Full Name</label>
+        <input type="text"
+        class="form-control form-control-sm " 
+        placeholder="Enter Full Name"
+        ngModel 
+        name="name" 
+        required 
+        #name="ngModel">
+        <span class="help-block" *ngIf="!name.valid && name.touched">Please enter FullName</span>
+        
+</div>
+<div class="formGroup col-sm-8">
+    <label>Email address</label>
+            <input type="email" 
+            class="form-control form-control-sm"
+            placeholder="Enter email" 
+            ngModel 
+            name="email" 
+            required
+            email
+            #email="ngModel">
+            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid Email</span>
+        </div>
+        <div class="formGroup col-sm-8">
+            <label >Password</label>
+            <input type="password"
+            class="form-control form-control-sm"
+             placeholder="Password"
+              ngModel
+               name="password"
+                minlength="6" 
+                #password="ngModel" 
+                required>
+            <span class="help-block" *ngIf="!password.valid && password.touched">please Enter a valid password</span>
+            
+            </div>
+            <br>
+
+        <button 
+        class="btn btn-primary"
+        type="submit" [disabled]="!add.valid">{{ editMode ? "Update" : "Add" }}</button>
+</form>
+
+</div>
