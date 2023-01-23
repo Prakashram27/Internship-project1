@@ -33,8 +33,14 @@ export class AuthComponent {
 
     this.inputEmail = form.value.email;
     this.inputPassword = form.value.password;
-    console.log(this.inputEmail)
-    console.log(this.inputPassword)
+    // console.log(this.inputEmail)
+    // console.log(this.inputPassword)
+    if(this.inputEmail === this.loginUser.email && this.inputPassword === this.loginUser.password){
+      this.route.navigate(['home'])
+    }
+    else{
+      this.error = "Incorrect UserName or Password"
+    }
 
   }
   onHandleErr(){
