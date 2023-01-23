@@ -9,8 +9,6 @@ import { userService } from './user.service';
 })
 export class AppComponent {
   title = 'my-app';
-  
-  
 
   constructor(private userService:userService,
     private route:Router) {

@@ -15,8 +15,8 @@ const routes: Routes = [
   { path:'login', component:AuthComponent},
   { path:'userList', component:UserListComponent},
   { path:'edituser', component: EditUserComponent },
-  { path:'userlistedr', component:UserListComponent},
-  { path: '**', component: PageNotFoundComponent }
+  { path:'userlisted', component:UserListComponent},
+  { path: '**', redirectTo:"",pathMatch: 'full' }
   ];
 
 @NgModule({

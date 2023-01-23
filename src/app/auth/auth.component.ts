@@ -4,12 +4,16 @@ import { Route, Router } from '@angular/router';
 import { User } from '../costomer.model';
 import { userService } from '../user.service';
 
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
+  error:any= ""
+
+  
   
  constructor(private route:Router,
   private userServices:userService){}
@@ -24,6 +28,7 @@ export class AuthComponent {
     password:'Developer'
   }
   
+  
   onSubmit(form:NgForm){
 
     this.inputEmail = form.value.email;
@@ -31,13 +36,9 @@ export class AuthComponent {
     console.log(this.inputEmail)
     console.log(this.inputPassword)
 
-    if(this.inputEmail === this.loginUser.email && this.inputPassword === this.loginUser.password)
-    {
-      this.route.navigate(['home'])
-      this.userServices.Authcheck.push("logged")
-    }
-    form.reset();
-
   }
-
+  onHandleErr(){
+    this.error=null
+    console.log(this.error)
+  }
 }

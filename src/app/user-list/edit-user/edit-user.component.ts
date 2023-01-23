@@ -12,9 +12,17 @@ import { userService } from 'src/app/user.service';
 })
 export class EditUserComponent{
 
+  // possword showHide
 
-  //toggle
-  showPassword: boolean= false;
+  showPassword!:boolean
+
+    
+  
+
+ 
+
+
+  
 
   //VALIDATION
 
@@ -37,6 +45,11 @@ export class EditUserComponent{
   
 
   ngOnInit(): void{
+    
+
+
+
+
     this.subscription = this.userService.startedEditing
     .subscribe(
       (index:number)=>{

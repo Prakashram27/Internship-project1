@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="parent">
 
 <form (ngSubmit)=onAddItem(add) #add="ngForm" > 
@@ -10,7 +12,7 @@
         name="name" 
         required 
         #name="ngModel">
-        <span class="help-block" *ngIf="!name.valid && name.touched">Please enter FullName</span>
+        <span class="text-danger" *ngIf="!name.valid && name.touched">Please enter FullName</span>
         
 </div>
 <div class="formGroup col-sm-8">
@@ -23,19 +25,29 @@
             required
             email
             #email="ngModel">
-            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid Email</span>
+            <span class="text-danger" *ngIf="!email.valid && email.touched">Please enter a valid Email</span>
         </div>
         <div class="formGroup col-sm-8">
             <label >Password</label>
-            <input type="password"
-            class="form-control form-control-sm"
+            <input [type]="showPassword ? 'text' : 'password'"
+            class="form-control form-control-sm pwd-control"
              placeholder="Password"
               ngModel
                name="password"
                 minlength="6" 
                 #password="ngModel" 
                 required>
-            <span class="help-block" *ngIf="!password.valid && password.touched">please Enter a valid password</span>
+                <div>
+                    <i alt="show" class="far fa-eye eye-show"
+                       (click)="showPassword = !showPassword"
+                       [class.hide]="showPassword"></i>
+                    <i alt="hide" class="far fa-eye-slash eye-hide"
+                       (click)="showPassword = !showPassword"
+                       [class.hide]="!showPassword"></i>
+                    </div>
+        
+
+            <span class="text-danger" *ngIf="!password.valid && password.touched">please Enter a valid password</span>
             
             </div>
             <br>
