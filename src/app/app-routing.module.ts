@@ -10,10 +10,12 @@ import { UserListComponent } from './user-list/user-list.component';
 // import { UserUpdateComponent } from './user-list/user-update/user-update.component';
 
 const routes: Routes = [
-  { path:"",  component:AuthComponent},
+  // { path:"",  component:AuthComponent},
+  { path:'login',component:AuthComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path:"home",canActivate:[AuthGaurd], component: HomeComponent},
 
-  { path:'login',component:AuthComponent},
+ 
   { path:'userList',canActivate:[AuthGaurd], component:UserListComponent},
   { path:'edituser',canActivate:[AuthGaurd], component:EditUserComponent},
   { path:'edituser/:id',component: EditUserComponent },

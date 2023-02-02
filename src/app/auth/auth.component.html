@@ -1,5 +1,5 @@
 
-<app-alert [message]="error" *ngIf="error" (close)="onHandleErr()"></app-alert>
+ <app-alert [message]="error" *ngIf="error" (close)="onHandleErr()"></app-alert>
 
 <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-6">
@@ -14,8 +14,9 @@
                         minlength="6">
                     <br>
                 </div>
-                <button class="btn btn-primary" [disabled]="!authForm.valid">Login</button>
+                <button class="btn btn-primary" >Login</button>
         
         </form>
     </div>
 </div>
+

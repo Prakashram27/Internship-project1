@@ -78,6 +78,7 @@ onAddItem(form:NgForm){
     this.userService.updateUser(this.editedItemUser,newUser)
     //user update template 
     this.statusUpdate = "User Updated SuccessFully"
+    form.reset();
   }
   else{
   this.userService.onUserAdded(newUser)
