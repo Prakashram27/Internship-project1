@@ -1,16 +1,69 @@
-<app-edit-user></app-edit-user>
-    <div class="row">
-        <div class="col-xs-12 col-sm-8">
-            <div class="list-group col-xs-10">
-                <a style="cursor: pointer;"
-                class="list-group-item" *ngFor="let user of userListItems; let i=index"
-                (click)="onEditItem(i)">
-                    <h4 class="content">{{user.name}}</h4>
-                    <p class="content">{{user.email}}</p>
-                </a>
-            </div>
+<app-user-alert [statusMessage]="statusUpdate" *ngIf="statusUpdate" (okay)="onHandleErr()"></app-user-alert>
+<div class="parent">
+    <form (ngSubmit)="onAddUser(add1)" #add1="ngForm">
+
+        <!-- NAME SECTION -->
+        <div class="formGroup" class="col-sm-8">
+            <label>Enter your Full Name</label>
+            <input type="text" class="form-control form-control-sm " placeholder="Enter Full Name" ngModel name="name"
+                required #name="ngModel">
+            <span class="text-danger" *ngIf="!name.valid && name.touched">Please enter FullName</span>
         </div>
-    </div> 
-    <div>
-    </div>
-    
+        <!-- EMAIL SECTION -->
+        <div class="formGroup col-sm-8">
+            <label>Email address</label>
+            <input type="email" class="form-control form-control-sm" placeholder="Enter email" ngModel name="email"
+                required email #email="ngModel">
+            <span class="text-danger" *ngIf="!email.valid && email.touched">Please enter a valid Email</span>
+        </div>
+
+        <!-- PASSWORD SECTION -->
+        <!-- <div class="formGroup col-sm-8"> -->
+
+        <label>Password</label>
+
+        <div class="form-group inner-addon right-addon col-sm-8">
+            <div class="input-group col-6 mx-auto">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control pwd-control" #password="ngModel"
+                    placeholder="Password" ngModel name="password" minlength="6" required>
+                <div class="icon">
+                    <i alt="show" class="fa fa-eye eye-show" (click)="showPassword = !showPassword"
+                        [class.hide]="showPassword"></i>
+                    <i alt="hide" class="fa fa-eye-slash eye-hide" (click)="showPassword = !showPassword"
+                        [class.hide]="!showPassword"></i>
+                </div>
+            </div>
+
+        </div>
+        <span class="text-danger" *ngIf="!password.valid && password.touched">please Enter a valid
+            password</span>
+            <br>
+        <!-- <span class="text-danger" *ngIf="!password.valid && password.touched">please Enter a valid
+            password</span>
+        <br> -->
+
+        <!-- CONFIRM PASSWORD SECTION -->
+        <!-- <div class="formGroup col-sm-8"> -->
+        <label>Password</label>
+        <div class="form-group inner-addon right-addon col-sm-8">
+            <div class="input-group col-6 mx-auto">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control pwd-control" #confirmPassword="ngModel"
+                    appCheckPassword="password" placeholder="Password" ngModel name="confirmPassword" minlength="6"
+                    required>
+
+                <div class="icon">
+                    <i alt="show" class="fa fa-eye eye-show" (click)="showPassword = !showPassword"
+                        [class.hide]="showPassword"></i>
+                    <i alt="hide" class="fa fa-eye-slash eye-hide" (click)="showPassword = !showPassword"
+                        [class.hide]="!showPassword"></i>
+                </div>
+            </div>
+            
+                <span class="text-danger" *ngIf="!confirmPassword.valid && confirmPassword.touched ">please Enter a
+                    valid password</span><br>
+                <span class="text-danger"
+                    *ngIf="!confirmPassword.valid && confirmPassword.errors?.['notEqual']">Password does not
+                    match</span>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!add1.valid">{{"Add"}}</button>
+        </div>

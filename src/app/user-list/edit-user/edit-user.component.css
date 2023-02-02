@@ -6,24 +6,23 @@ input.ng-invalid.ng-touched{
     margin-top: 30px;
    
 }
-
-
-
 .hide {
     display: none;
   }
-  .inner-addon { 
-      position: relative; 
-  }
-  .inner-addon .far {
-    position: absolute;
-    padding: 10px 30px;
+  
+  .inner-addon .fa {
+    padding: 10px 15px;
     z-index: 100;
     cursor: pointer;
   }
-  .left-addon .far  { left:  0px; }
-  .right-addon .far { right: 0px; }
+  .left-addon .fa  { left:  0px; }
+  .right-addon .fa { right: 0px; }
    
   .left-addon input  { padding-left:  30px; }
   .right-addon input { padding-right: 30px; }
+
+  .icon{
+    border: 1px solid gray;
+  }
+ 
 

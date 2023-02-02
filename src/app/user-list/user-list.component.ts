@@ -1,5 +1,6 @@
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../costomer.model';
 import { userService } from '../user.service';
@@ -9,43 +10,61 @@ import { userService } from '../user.service';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit,OnDestroy{
+export class UserListComponent implements OnInit, OnDestroy {
 
-  userListItems!: User[];
-  private Uschanged! :Subscription;
-
- 
-
-  
-  constructor(private userService:userService,
-    private route:Router){}
+  password!: string;
+  password2!: any
 
 
-  ngOnInit() {
-  this.userListItems= this.userService.getUserList();
-  this.Uschanged = this.userService.usersChanged
-  .subscribe((user:User[])=>{
-    this.userListItems = user;
+
+  user: any;
+  statusUpdate: string = "";
+  id!: number;
+
+  // PASSWORD SHOW/HIDE VARIABLE
+  showPassword!: boolean
+  showPassword1! : boolean
+
+  //VALIDATION
+  registerForm!: FormGroup
+  submitted: boolean = false;
 
 
-  })
+  @ViewChild('add1') slAddform!: NgForm
+  subscription!: Subscription
+confirmPassword: any;
+
+  constructor(private userService: userService,
+    private routes: ActivatedRoute,
+    private form: FormBuilder,
+    private activatedRoute: Router) {
   }
+
+  ngOnInit(): void { }
+
+
+  //ADD OR EDIT BUTTON FUNCTION
+  onAddUser(form: NgForm) {
+    console.log('adding')
+    const value = form.value
+    console.log(form.value)
+    const newUser = new User(form.value.name, form.value.email, form.value.password)
+    this.userService.onUserAdded(newUser)
+    form.reset()
+    this.statusUpdate = "User Added SuccessFully"
+
+  }
+
 
   ngOnDestroy(): void {
-    this.Uschanged.unsubscribe()
-  }
-
-
-  
-  onEditItem(index:number){
-    this.userService.startedEditing.next(index)
 
   }
-  
+  // DYNAMIC COMPONENT CLOSE BUTTON
+  onHandleErr() {
+    this.statusUpdate = "";
+    this.activatedRoute.navigate(['/home'])
+  }
 }
-    
 
-  
 
-  
-// }
+

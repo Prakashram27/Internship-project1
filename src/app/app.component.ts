@@ -13,27 +13,8 @@ export class AppComponent {
   constructor(private userService:userService,
     private route:Router) {
       
-    }
-  
-  // toggle = this.userService.isAuthendication() ;   
+    }  
   }
-
- 
-
-
-  // Loggout button function
-
-//   onLogout(){
-//     this.userService.Authcheck.pop();
-//     console.log(this.userService.Authcheck)
-//     this.route.navigate(['/login'])
-//     this.afterlogin = false
-
-//   }
- 
-
-// }
-
 function indexOf(arg0: string) {
   throw new Error('Function not implemented.');
 }

@@ -1,5 +1,6 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/costomer.model';
 import { userService } from 'src/app/user.service';
@@ -10,90 +11,90 @@ import { userService } from 'src/app/user.service';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css']
 })
-export class EditUserComponent{
+export class EditUserComponent implements OnInit,OnDestroy{
+  user:any;
+  statusUpdate:string = "" ;
+  id!: number;
+  isLoding!:boolean
 
-  // possword showHide
-
+  // PASSWORD SHOW/HIDE VARIABLE
   showPassword!:boolean
-
-    
-  
-
- 
-
-
-  
+  showPassword1!:boolean
 
   //VALIDATION
-
   registerForm!:FormGroup
   submitted:boolean = false;
 
 
-
-
   @ViewChild('add') slform!:NgForm
-  subscription!: Subscription;
+  subscription!: Subscription
   editMode = false;
   editedItemUser! : number;
   editedItem!:User;
 
   constructor(private userService:userService,
-    private form:FormBuilder){
-
+    private routes:ActivatedRoute ,
+    private form:FormBuilder,
+    private activatedRoute:Router){
   }
   
 
-  ngOnInit(): void{
+  ngOnInit(): void {
+    // GETTING VALUES BY SETVALUE IN EDITMODE
+
     
 
-
-
-
-    this.subscription = this.userService.startedEditing
-    .subscribe(
-      (index:number)=>{
-        this.editedItemUser = index;
+    
+    this.subscription = this.routes.params.subscribe((params:Params)=>{      
+      this.editedItemUser = params['id'];
+      if(this.editedItemUser){
         this.editMode = true;
-        this.editedItem = this.userService.getUser(index);
-        this.slform.setValue({
-          name : this.editedItem.name,
-          email : this.editedItem.email,
-          password : this.editedItem.password 
-            
-          }
-        )
       }
-    )
+      else{
+        this.editMode = false;
+      }
+      this.editedItem = this.userService.getUser(params['id']);
+      console.log("target",params)
+       this.user = this.userService.getUser(params['id'])
+    })
+    setTimeout(()=>{
+      console.log(this.user.name)
+      this.slform.setValue({
+        name: this.user.name,
+        email : this.user.email,
+        password : this.user.password ,
+        conformPassword:this.user.password
+        
+        })
+    },0) 
+  }
 
 
-    
-
-}
-
-ngOnDestroy(): void {
-  this.subscription.unsubscribe();
-  
-}
-
-
+//ADD OR EDIT BUTTON FUNCTION
 onAddItem(form:NgForm){
   const value = form.value
   const newUser = new User(value.name,value.email,value.password)
   if(this.editMode){
     this.userService.updateUser(this.editedItemUser,newUser)
+    //user update template 
+    this.statusUpdate = "User Updated SuccessFully"
   }
   else{
   this.userService.onUserAdded(newUser)
+  // user added Template here
+  this.statusUpdate = "User Added SuccessFully"
   }
-
-
-  //VALIDATION
-  this.submitted = true
 }
 
-
-
-
-
+ngOnDestroy(): void {
+  this.editMode =  false;
+  this.subscription.unsubscribe();
+  
+}
+// DYNAMIC COMPONENT CLOSE BUTTON
+onHandleErr(){
+  this.statusUpdate = "";
+  this.activatedRoute.navigate(['home'])
+  this.isLoding = true
+}
 }

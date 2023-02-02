@@ -9,6 +9,7 @@ import { User } from "./costomer.model";
 
 @Injectable({ providedIn: 'root'})
 export class userService  {
+  userName!:string;
 
   //Login User
   loginUser: User={
@@ -29,6 +30,11 @@ export class userService  {
       new User('Prakash','prakashram27@gmail.com','Angular'),
       new User('TestUser','test.test@mail.com','Testing'),
     ]
+    getcrtUser(mail:string,password:string){
+      const currentUser = this.userListItems.filter((user)=> user.email==mail&& user.password == password)
+      return currentUser;
+
+    }
 
     getUserList(){
       // return this.userListItems[index]
@@ -49,13 +55,6 @@ export class userService  {
       this.userListItems[index] = newUser;
       this.usersChanged.next(this.userListItems.slice())
     }
-
-
-
-    
-
-
-   
 
 
 

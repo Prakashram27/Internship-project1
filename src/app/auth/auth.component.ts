@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { User } from '../costomer.model';
 import { userService } from '../user.service';
 
@@ -12,30 +13,41 @@ import { userService } from '../user.service';
 })
 export class AuthComponent {
   error:any= ""
+  InitialUser!:any;
+  userName!: string;
+
+  
 
   
   
  constructor(private route:Router,
-  private userServices:userService){}
+  private userService:userService,
+  private authservice:AuthService){
+    this.InitialUser = this.userService.userListItems
+  }
+
+  // this.loginUsers = this.userServices.userListItems;
 
   inputEmail:string ="";
   inputPassword:string = "";
+
   
 
-   loginUser: User={
-    name: 'Prakash',
-    email:'prakashram1327@gmail.com',
-    password:'Developer'
-  }
+  
+
   
   
   onSubmit(form:NgForm){
-
+    this.authservice.login()
+    this.userService.userName = form.value.name
+    
     this.inputEmail = form.value.email;
     this.inputPassword = form.value.password;
     // console.log(this.inputEmail)
     // console.log(this.inputPassword)
-    if(this.inputEmail === this.loginUser.email && this.inputPassword === this.loginUser.password){
+   
+const currentUser = this.userService.getcrtUser(this.inputEmail,this.inputPassword)
+    if(currentUser.length>0){
       this.route.navigate(['home'])
     }
     else{

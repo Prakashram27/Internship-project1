@@ -1,60 +1,78 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<app-user-alert [statusMessage]="statusUpdate" *ngIf="statusUpdate" (okay)="onHandleErr()"></app-user-alert>
 <div class="parent">
+    <form (ngSubmit)=onAddItem(add) #add="ngForm">
 
-<form (ngSubmit)=onAddItem(add) #add="ngForm" > 
+        <!-- NAME SECTION -->
         <div class="formGroup" class="col-sm-8">
-        <label>Enter your Full Name</label>
-        <input type="text"
-        class="form-control form-control-sm " 
-        placeholder="Enter Full Name"
-        ngModel 
-        name="name" 
-        required 
-        #name="ngModel">
-        <span class="text-danger" *ngIf="!name.valid && name.touched">Please enter FullName</span>
-        
-</div>
-<div class="formGroup col-sm-8">
-    <label>Email address</label>
-            <input type="email" 
-            class="form-control form-control-sm"
-            placeholder="Enter email" 
-            ngModel 
-            name="email" 
-            required
-            email
-            #email="ngModel">
+            <label>Enter your Full Name</label>
+            <input type="text" class="form-control form-control-sm " placeholder="Enter Full Name" ngModel name="name"
+                required #name="ngModel">
+            <span class="text-danger" *ngIf="!name.valid && name.touched">Please enter FullName</span>
+        </div>
+        <br>
+        <!-- EMAIL SECTION -->
+        <div class="formGroup col-sm-8">
+            <label>Email address</label>
+            <input type="email" class="form-control form-control-sm" placeholder="Enter email" ngModel name="email"
+                required email #email="ngModel">
             <span class="text-danger" *ngIf="!email.valid && email.touched">Please enter a valid Email</span>
         </div>
-        <div class="formGroup col-sm-8">
-            <label >Password</label>
-            <input [type]="showPassword ? 'text' : 'password'"
-            class="form-control form-control-sm pwd-control"
-             placeholder="Password"
-              ngModel
-               name="password"
-                minlength="6" 
-                #password="ngModel" 
-                required>
-                <div>
-                    <i alt="show" class="far fa-eye eye-show"
-                       (click)="showPassword = !showPassword"
-                       [class.hide]="showPassword"></i>
-                    <i alt="hide" class="far fa-eye-slash eye-hide"
-                       (click)="showPassword = !showPassword"
-                       [class.hide]="!showPassword"></i>
-                    </div>
+        <br>
+
+        <!-- PASSWORD SECTION -->
+        <!-- <div class="formGroup col-sm-8"> -->
         
 
-            <span class="text-danger" *ngIf="!password.valid && password.touched">please Enter a valid password</span>
-            
+            <label>Password</label>
+
+
+            <div class="form-group inner-addon right-addon col-sm-8">
+                <div class="input-group col-6 mx-auto">
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control pwd-control"
+                        placeholder="Password" ngModel name="password" minlength="6" #password="ngModel" required>
+
+                    <div class="icon">
+                    <i alt="show" class="fa fa-eye eye-show" (click)="showPassword = !showPassword"
+                        [class.hide]="showPassword"></i>
+                    <i alt="hide" class="fa fa-eye-slash eye-hide" (click)="showPassword = !showPassword"
+                        [class.hide]="!showPassword"></i>
+                    </div>
+                </div>
             </div>
+            <span class="text-danger" *ngIf="!password.valid && password.touched">please Enter a valid
+                password</span>
             <br>
 
-        <button 
-        class="btn btn-primary"
-        type="submit" [disabled]="!add.valid">{{ editMode ? "Update" : "Add" }}</button>
-</form>
+            <!-- CONFIRM PASSWORD SECTION -->
+            <!-- <div class="formGroup col-sm-8"> -->
+            <label>Conform Password</label>
+            <div class="form-group inner-addon right-addon col-sm-8">
+                <div class="input-group col-10">
+                    <input [type]="showPassword1 ? 'text' : 'password'" class="form-control pwd-control"
+                        appCheckPassword="password" placeholder="Password" ngModel name="conformPassword" minlength="6"
+                        #confirmPassword="ngModel" required>
+
+                    <div class="icon">
+                        <i alt="show" class="fa fa-eye eye-show" (click)="showPassword1 = !showPassword1"
+                            [class.hide]="showPassword1"></i>
+                        <i alt="hide" class="fa fa-eye-slash eye-hide" (click)="showPassword1 = !showPassword1"
+                            [class.hide]="!showPassword1"></i>
+                    </div>
+                </div>
+
+                <span class="text-danger" *ngIf="!confirmPassword.valid && confirmPassword.touched ">please Enter a
+                    valid password</span><br>
+                <span class="text-danger"
+                    *ngIf="!confirmPassword.valid && confirmPassword.errors?.['notEqual']">Password does not
+                    match</span>
+            </div>
+            <!-- <div *ngIf="password2.invalid && (password1.dirty || password1.touched)" class="alert alert-danger">
+            Please confirm your password.
+        </div> -->
+    
+
+        <button class="btn btn-primary" type="submit" [disabled]="!add.valid">{{"Update"}}</button>
+    </form>
 
 </div>
+<!-- <p ngIf="isLoding">Loading...</p> -->

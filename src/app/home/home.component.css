@@ -7,6 +7,15 @@
     margin-bottom: 0px;
 }
 .welcome{
-    margin-left: 500px;
-    margin-top: 30px;
+    display: flex;
+    justify-content:space-between;
+    margin-top: 10px;
+}
+.welcomeWord{
+    margin-left: 10px;
+}
+.lgbtn{
+    border: 1px solid gray;
+    margin-top: 0px;
+    margin-right: 10px;
 }

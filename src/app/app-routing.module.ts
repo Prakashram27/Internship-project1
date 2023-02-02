@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGaurd } from './auth-gaurd.service';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -9,12 +10,13 @@ import { UserListComponent } from './user-list/user-list.component';
 // import { UserUpdateComponent } from './user-list/user-update/user-update.component';
 
 const routes: Routes = [
-  { path:"",  component:HomeComponent},
-  { path:"home", component: HomeComponent},
+  { path:"",  component:AuthComponent},
+  { path:"home",canActivate:[AuthGaurd], component: HomeComponent},
 
-  { path:'login', component:AuthComponent},
+  { path:'login',component:AuthComponent},
   { path:'userList', component:UserListComponent},
-  { path:'edituser', component: EditUserComponent },
+  { path:'edituser',canActivate:[AuthGaurd], component:EditUserComponent},
+  { path:'edituser/:id',component: EditUserComponent },
   { path:'userlisted', component:UserListComponent},
   { path: '**', redirectTo:"",pathMatch: 'full' }
   ];

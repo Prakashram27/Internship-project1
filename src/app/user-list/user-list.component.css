@@ -1,13 +1,33 @@
-.list-group-item{
-    text-align: center;
-    height: 70px;
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
 }
-.content{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-.row{
-    margin-top: 30px;
+.parent{
     margin-left: 300px;
+    margin-top: 30px;
+   
 }
+.hide {
+    display: none;
+  }
+  
+  .inner-addon .fa {
+    padding: 10px 15px;
+    z-index: 100;
+    cursor: pointer;
+  }
+  .left-addon .fa  { left:  0px; }
+  .right-addon .fa { right: 0px; }
+   
+  .left-addon input  { padding-left:  30px; }
+  .right-addon input { padding-right: 30px; }
 
+  .icon{
+    border: 1px solid gray;
+  }
+  .btn{
+    margin-left: 450px;
+    width: 200px;
+
+    
+  }
+ 

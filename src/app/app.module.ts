@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +14,12 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AlertComponent } from './shared/alert/alert/alert.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { UserAlertComponent } from './shared/user-alert/user-alert.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthService } from './auth.service';
+import { AuthGaurd } from './auth-gaurd.service';
+import { CheckPasswordDirective } from './user-list/edit-user/check-password.directive';
 
 
 @NgModule({
@@ -26,16 +32,19 @@ import { AlertComponent } from './shared/alert/alert/alert.component';
     PageNotFoundComponent,
     NavbarComponent,
     AlertComponent,
-    
-    
+    UserAlertComponent,
+    CheckPasswordDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
+
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthService,AuthGaurd],
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

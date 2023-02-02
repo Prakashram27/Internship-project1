@@ -1,19 +1,19 @@
 <div class="welcome">
-    <h5>
-        Hello {{ loginData.name }} 
-    </h5>
-    <h6>WelCome to Homepage</h6> 
+    <span class="welcomeWord">WelCome {{'User'}}</span>
+    <button class="lgbtn" (click)="onLogOut()">Logout</button>
 </div>
+
 
 <div class="row">
     <div class="col-xs-8 col-sm-8">
         <div class="list-group col-xs-10">
-            <a style="cursor: pointer;" class="list-group-item" *ngFor="let user of showUser">
+            <a style="cursor: pointer;" class="list-group-item" *ngFor="let user of showUser; let i=index"
+                (click)="onEditedItem(i)">
                 <h4 class="content">{{user.name}}</h4>
                 <p class="content">{{user.email}}</p>
             </a>
         </div>
     </div>
-</div> 
+</div>
 <div>
 </div>
