@@ -56,7 +56,7 @@ const currentUser = this.userService.getcrtUser(this.inputEmail,this.inputPasswo
 
   }
   onHandleErr(){
-    this.error=null
     console.log(this.error)
   }
+
 }

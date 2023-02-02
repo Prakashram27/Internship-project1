@@ -14,10 +14,10 @@ const routes: Routes = [
   { path:"home",canActivate:[AuthGaurd], component: HomeComponent},
 
   { path:'login',component:AuthComponent},
-  { path:'userList', component:UserListComponent},
+  { path:'userList',canActivate:[AuthGaurd], component:UserListComponent},
   { path:'edituser',canActivate:[AuthGaurd], component:EditUserComponent},
   { path:'edituser/:id',component: EditUserComponent },
-  { path:'userlisted', component:UserListComponent},
+  { path:'userlisted',canActivate:[AuthGaurd], component:UserListComponent},
   { path: '**', redirectTo:"",pathMatch: 'full' }
   ];
 

@@ -1,0 +1,6 @@
+.spinner-border, .spinner-grow
+{
+  position: absolute;
+  left: 43%;
+  top: 50%;
+}
