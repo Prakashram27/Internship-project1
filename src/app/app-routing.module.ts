@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGaurd } from './admin-gaurd.service';
 import { AuthGaurd } from './auth-gaurd.service';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
@@ -17,9 +18,9 @@ const routes: Routes = [
 
  
   { path:'userList',canActivate:[AuthGaurd], component:UserListComponent},
-  { path:'edituser',canActivate:[AuthGaurd], component:EditUserComponent},
-  { path:'edituser/:id',component: EditUserComponent },
-  { path:'userlisted',canActivate:[AuthGaurd], component:UserListComponent},
+  { path:'edituser',canActivate:[AdminGaurd], component:EditUserComponent},
+  { path:'edituser/:id', canActivate:[AdminGaurd], component: EditUserComponent },
+  // { path:'userlisted',canActivate:[AuthGaurd], component:UserListComponent},
   { path: '**', redirectTo:"",pathMatch: 'full' }
   ];
 

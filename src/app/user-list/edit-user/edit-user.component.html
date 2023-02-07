@@ -17,7 +17,16 @@
                 required email #email="ngModel">
             <span class="text-danger" *ngIf="!email.valid && email.touched">Please enter a valid Email</span>
         </div>
-        <br>
+        
+
+         <!-- User or Admin RadioButtons -->
+         <span style="margin-top: 10px;">User Role</span>
+<input type="radio" value="admin" ngModel name="role" #role="ngModel"> Admin 
+<input type="radio" value="user" ngModel name="role" #role="ngModel"> User
+
+<br>
+<br>
+
 
         <!-- PASSWORD SECTION -->
         <!-- <div class="formGroup col-sm-8"> -->

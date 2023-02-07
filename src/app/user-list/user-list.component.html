@@ -1,3 +1,19 @@
+
+<div  *ngIf="loader" id="myModal" class="modal">
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <!-- Loader Div Ends -->
+
+
 <app-user-alert [statusMessage]="statusUpdate" *ngIf="statusUpdate" (okay)="onHandleErr()"></app-user-alert>
 <div class="parent">
     <form (ngSubmit)="onAddUser(add1)" #add1="ngForm">
@@ -16,6 +32,14 @@
                 required email #email="ngModel">
             <span class="text-danger" *ngIf="!email.valid && email.touched">Please enter a valid Email</span>
         </div>
+
+
+        <!-- User or Admin RadioButtons -->
+        <p>User Role</p>
+<input type="radio" value="admin" ngModel name="role" #role="ngModel"> <label for="admin">Admin</label> 
+<input type="radio" value="user" ngModel name="role" #role="ngModel"> User
+<br>
+<br>
 
         <!-- PASSWORD SECTION -->
         <!-- <div class="formGroup col-sm-8"> -->

@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from './auth.service';
 import { AuthGaurd } from './auth-gaurd.service';
 import { CheckPasswordDirective } from './user-list/edit-user/check-password.directive';
+import { AdminGaurd } from './admin-gaurd.service';
 
 
 
@@ -45,7 +46,7 @@ import { CheckPasswordDirective } from './user-list/edit-user/check-password.dir
     FontAwesomeModule
 
   ],
-  providers: [AuthService,AuthGaurd],
+  providers: [AuthService,AuthGaurd,AdminGaurd],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

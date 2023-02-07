@@ -2,9 +2,10 @@
     <div class="container-fluid">
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
-          <li><a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a></li>
+          <li><a class="nav-link" routerLink="/login" routerLinkActive="active" >Login</a></li>
             <li><a class="nav-link" routerLink="/home" routerLinkActive="active">Dashboard</a></li>
-            <li><a class="nav-link" routerLink='/userList' routerLinkActive="active">Add User</a></li>
+            <li><a class="nav-link" routerLink='/userList' *ngIf="isAdmin">Add User</a></li>
+            <!-- <h6 class="userName" *ngIF="isAdmin">Welcome {{currentUser.name}}</h6> -->
         </ul>
       </div>
     </div>

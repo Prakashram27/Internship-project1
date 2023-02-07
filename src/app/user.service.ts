@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable, OnInit, Output } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { AppModule } from "./app.module";
@@ -8,14 +8,18 @@ import { User } from "./costomer.model";
 
 
 @Injectable({ providedIn: 'root'})
-export class userService  {
+export class userService {
   userName!:string;
+  currentUser!:User[]
+ @Output() currentUserEmit:EventEmitter<any>=new EventEmitter();
+
 
   //Login User
   loginUser: User={
     name: 'Prakash',
     email:'prakashram1327@gmail.com',
-    password:'Developer'
+    password:'Developer',
+    role:"Admin"
   }
 
 
@@ -23,18 +27,39 @@ export class userService  {
   startedEditing = new Subject<number>();
 
     constructor(){}
-
-
-     //User List Array
+    
+    //User List Array
     userListItems:User[]=[
-      new User('Prakash','prakashram27@gmail.com','Angular'),
-      new User('TestUser','test.test@mail.com','Testing'),
+      new User('Prakash','prakashram27@gmail.com','123456','admin'),
+      new User('TestUser','test.test@mail.com','Testing','user'),
     ]
+    
+    
     getcrtUser(mail:string,password:string){
-      const currentUser = this.userListItems.filter((user)=> user.email==mail&& user.password == password)
-      return currentUser;
+      
+      this.currentUser = this.userListItems.filter((user)=> user.email==mail&& user.password == password )
+      // localStorage.setItem('userDetail', this.currentUser.findIndex(()))
+      this.currentUserEmit.emit(this.currentUser);
+      
+      return this.currentUser;
 
     }
+    
+    getUserType(){
+      if(this.currentUser[0].role !== 'admin'){
+
+        return false;
+      }
+      else{
+        return true;
+      }
+
+    
+    }
+    
+    
+    
+
 
     getUserList(){
       // return this.userListItems[index]
@@ -56,10 +81,9 @@ export class userService  {
       this.usersChanged.next(this.userListItems.slice())
     }
 
-
-
+  }
       // Dummy array for Login Check 
-      Authcheck :string[]= []
+      // Authcheck :string[]= []
 
 
       // isAuthendication(){
@@ -70,7 +94,9 @@ export class userService  {
       // }
 
 
+
+
     
 
-}
+
 

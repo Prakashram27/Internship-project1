@@ -62,6 +62,7 @@ export class EditUserComponent implements OnInit,OnDestroy{
       this.slform.setValue({
         name: this.user.name,
         email : this.user.email,
+        role:this.user.role,
         password : this.user.password ,
         conformPassword:this.user.password
         
@@ -73,7 +74,7 @@ export class EditUserComponent implements OnInit,OnDestroy{
 //ADD OR EDIT BUTTON FUNCTION
 onAddItem(form:NgForm){
   const value = form.value
-  const newUser = new User(value.name,value.email,value.password)
+  const newUser = new User(value.name,value.email,value.password,value.role)
   if(this.editMode){
     this.userService.updateUser(this.editedItemUser,newUser)
     //user update template 

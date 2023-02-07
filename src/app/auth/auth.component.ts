@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -15,9 +15,6 @@ export class AuthComponent {
   error:any= ""
   InitialUser!:any;
   userName!: string;
-
-  
-
   
   
  constructor(private route:Router,
@@ -30,6 +27,7 @@ export class AuthComponent {
 
   inputEmail:string ="";
   inputPassword:string = "";
+  inputRole : string = "";
 
   
 
@@ -54,9 +52,11 @@ const currentUser = this.userService.getcrtUser(this.inputEmail,this.inputPasswo
       this.error = "Incorrect UserName or Password"
     }
 
+
   }
   onHandleErr(){
     console.log(this.error)
+    this.error = ""
   }
 
 }
